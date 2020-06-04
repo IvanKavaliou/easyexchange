@@ -1,20 +1,12 @@
 /*C3*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C4*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C6*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C7*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C8*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C9*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C10*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C11*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C12*/SET SCHEMA PUBLIC
-DISCONNECT
+\u000d\u000a    drop table if exists accounts CASCADE 
+\u000d\u000a    drop table if exists transactions CASCADE 
+\u000d\u000a    drop table if exists users CASCADE 
+\u000d\u000a    drop sequence global_seq if exists
+create sequence global_seq start with 100000 increment by 1
+\u000d\u000a    create table accounts (\u000d\u000a       id integer not null,\u000d\u000a        currency varchar(255) not null,\u000d\u000a        value numeric(19,2),\u000d\u000a        id_user integer not null,\u000d\u000a        primary key (id)\u000d\u000a    )
+\u000d\u000a    create table transactions (\u000d\u000a       id integer not null,\u000d\u000a        date timestamp default now() not null,\u000d\u000a        value numeric(19,2),\u000d\u000a        id_account integer not null,\u000d\u000a        primary key (id)\u000d\u000a    )
+\u000d\u000a    create table users (\u000d\u000a       id integer not null,\u000d\u000a        email varchar(255) not null,\u000d\u000a        password varchar(255) not null,\u000d\u000a        registred timestamp default now() not null,\u000d\u000a        primary key (id)\u000d\u000a    )
+\u000d\u000a    alter table users \u000d\u000a       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+\u000d\u000a    alter table accounts \u000d\u000a       add constraint FK2l5v5t94ydrd2qrdeowftjp0i \u000d\u000a       foreign key (id_user) \u000d\u000a       references users \u000d\u000a       on delete cascade
+\u000d\u000a    alter table transactions \u000d\u000a       add constraint FKel34aoaa90bwlu4pkcfnm5tf9 \u000d\u000a       foreign key (id_account) \u000d\u000a       references accounts \u000d\u000a       on delete cascade
