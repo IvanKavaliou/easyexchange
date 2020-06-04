@@ -25,17 +25,16 @@ public class User {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
-    @NotBlank(message = "error.notBlank")
-    @Size(max = 100)
+    @NotBlank(message = "error.email.notBlank")
+    @Size(max = 100, message = "error.email.size")
     private String email;
 
     @Column(name = "password", nullable = false)
-    @NotBlank (message = "error.notBlank")
-    @Size(min = 4, max = 100)
+    @NotBlank (message = "error.password.notBlank")
+    @Size(min = 4, max = 100, message = "error.password.size")
     private String password;
 
     @Column(name = "registred", nullable = false, columnDefinition = "timestamp default now()")
-    @NotNull
     private Date registred = new Date();
 
 }
