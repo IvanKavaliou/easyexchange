@@ -46,4 +46,10 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = {ExsistException.class})
+    public ResponseEntity<Object> handleExsistException(ExsistException e){
+        ApiException apiException = new ApiException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now());
+        return new ResponseEntity<>(apiException, HttpStatus.NOT_ACCEPTABLE);
+    }
+
 }

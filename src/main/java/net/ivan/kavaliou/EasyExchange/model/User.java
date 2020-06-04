@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -24,13 +21,15 @@ public class User {
     private Integer id;
 
     @Column(name = "email", nullable = false, unique = true)
-    @Email
-    @NotBlank(message = "error.email.notBlank")
+    @Email (message = "error.email.format")
+    @NotNull(message = "error.email.notEmpty")
+    @NotEmpty(message = "error.email.notEmpty")
     @Size(max = 100, message = "error.email.size")
     private String email;
 
     @Column(name = "password", nullable = false)
-    @NotBlank (message = "error.password.notBlank")
+    @NotNull(message = "error.email.notEmpty")
+    @NotEmpty (message = "error.password.notEmpty")
     @Size(min = 4, max = 100, message = "error.password.size")
     private String password;
 

@@ -1,20 +1,31 @@
 package net.ivan.kavaliou.EasyExchange.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.ivan.kavaliou.EasyExchange.exceptions.ExsistException;
 import net.ivan.kavaliou.EasyExchange.model.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import net.ivan.kavaliou.EasyExchange.repository.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
 
+    @Autowired
+    UsersRepository usersRepository;
+
     @PostMapping("")
-    public User registration(@RequestBody User user){
-        return user;
+    @ResponseStatus(HttpStatus.CREATED)
+    public User registration(@RequestBody @Valid User user){
+        log.debug("RegistrationController::registration {}", user);
+        if (usersRepository.findByEmail(user.getEmail()).isPresent()){
+            throw new ExsistException("error.user.exist");
+        }
+        return usersRepository.save(user);
     }
 
 }
