@@ -1,6 +1,7 @@
 package net.ivan.kavaliou.EasyExchange.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.ivan.kavaliou.EasyExchange.utils.enums.CurrencyType;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Data
+@Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,15 +30,12 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
     private User user;
 
     @Column(name = "currency", nullable = false)
-    @Size(min = 3, max = 3)
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     private CurrencyType currency;
 
-    @NotNull
     private BigDecimal value;
 }

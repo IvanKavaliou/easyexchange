@@ -1,8 +1,10 @@
 package net.ivan.kavaliou.EasyExchange.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.ivan.kavaliou.EasyExchange.utils.enums.TransactionType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,6 +15,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="transactions")
@@ -32,7 +35,12 @@ public class Transaction {
     @NotNull
     private BigDecimal value;
 
-    @Column(name = "date", nullable = false, columnDefinition = "timestamp default now()")
+
+    @Column(name = "transaction", nullable = false)
     @NotNull
+    @Enumerated(EnumType.STRING)
+    private TransactionType transaction;
+
+    @Column(name = "date", nullable = false, columnDefinition = "timestamp default now()")
     private Date date = new Date();
 }

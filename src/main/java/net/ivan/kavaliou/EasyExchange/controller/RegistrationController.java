@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Slf4j
 @RestController
 public class RegistrationController {
 
@@ -20,7 +19,6 @@ public class RegistrationController {
     @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
     public User registration(@RequestBody @Valid User user){
-        log.debug("RegistrationController::registration {}", user);
         if (usersRepository.findByEmail(user.getEmail()).isPresent()){
             throw new ExsistException("error.user.exist");
         }
