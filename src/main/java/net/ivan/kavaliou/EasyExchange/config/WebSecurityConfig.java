@@ -2,7 +2,6 @@ package net.ivan.kavaliou.EasyExchange.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,16 +13,21 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.csrf()
+                .disable()
+                .httpBasic()
+                .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/registration").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/registration")
+                .permitAll()
+                .anyRequest()
+                .authenticated();
     }
 
 
@@ -32,8 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("SELECT email, password FROM users " +
-                        "WHERE email = ?");
+                .usersByUsernameQuery("SELECT email, password, enabled FROM users WHERE email = ?")
+                .authoritiesByUsernameQuery("SELECT email, 'ROLE_USER' FROM users WHERE email = ?");
     }
 
 }

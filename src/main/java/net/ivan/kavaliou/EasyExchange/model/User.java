@@ -36,4 +36,7 @@ public class User {
     @Column(name = "registred", nullable = false, columnDefinition = "timestamp default now()")
     private Date registred = new Date();
 
+    @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true")
+    private boolean enabled = true;
+
 }

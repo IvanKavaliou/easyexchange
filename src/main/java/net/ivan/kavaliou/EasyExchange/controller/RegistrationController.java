@@ -12,13 +12,12 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
-@RequestMapping("/registration")
 public class RegistrationController {
 
     @Autowired
     UsersRepository usersRepository;
 
-    @PostMapping("")
+    @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
     public User registration(@RequestBody @Valid User user){
         log.debug("RegistrationController::registration {}", user);
