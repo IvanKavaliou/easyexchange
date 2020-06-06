@@ -42,7 +42,7 @@ public class TransactionsController {
             accountsRepository.save(account.get());
             return transactionsRepository.save(transaction);
         }
-        throw new NotFoundException("error.account.notFound");
+        throw new NotFoundException("Account not found!");
     }
 
     @GetMapping("/transactions")

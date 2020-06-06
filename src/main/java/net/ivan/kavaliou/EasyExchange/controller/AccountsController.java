@@ -33,7 +33,7 @@ public class AccountsController {
     @GetMapping("/accounts/add/{currency}")
     public Account getAllAccounts(@PathVariable CurrencyType currency){
         if(accountsRepository.findByUserAndCurrency(usersService.getAuthUser(), currency).isPresent()){
-            throw new ExsistException("error.account.exsist");
+            throw new ExsistException("Account with this currency allredy exsist!");
         }
         Account account = Account.builder()
                                  .currency(currency)
@@ -49,7 +49,7 @@ public class AccountsController {
         if(account.isPresent()){
             return account.get();
         }
-        throw new NotFoundException("error.account.notFound");
+        throw new NotFoundException("Account not found!");
     }
 
     @DeleteMapping("/accounts/{currency}")
@@ -59,7 +59,7 @@ public class AccountsController {
             accountsRepository.delete(account.get());
             return;
         }
-        throw new NotFoundException("error.account.notFound");
+        throw new NotFoundException("Account not found!");
     }
 
 }

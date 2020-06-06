@@ -52,4 +52,10 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(apiException, HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @ExceptionHandler(value = {WrongPasswordException.class})
+    public ResponseEntity<Object> handleExsistException(WrongPasswordException e){
+        ApiException apiException = new ApiException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE, LocalDateTime.now());
+        return new ResponseEntity<>(apiException, HttpStatus.NOT_ACCEPTABLE);
+    }
+
 }
