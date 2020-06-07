@@ -33,7 +33,7 @@ public class Account {
     private User user;
 
     @Column(name = "currency", nullable = false)
-    @NotNull
+    @NotNull(message = "Currency cannot be null!")
     @Enumerated(EnumType.STRING)
     private CurrencyType currency;
 

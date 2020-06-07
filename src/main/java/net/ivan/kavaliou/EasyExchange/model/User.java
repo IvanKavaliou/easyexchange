@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -21,16 +22,16 @@ public class User {
     private Integer id;
 
     @Column(name = "email", nullable = false, unique = true)
-    @Email (message = "error.email.format")
-    @NotNull(message = "error.email.notEmpty")
-    @NotEmpty(message = "error.email.notEmpty")
-    @Size(max = 100, message = "error.email.size")
+    @Email (message = "Can be email format!")
+    @NotNull(message = "Email cannot be null!")
+    @NotEmpty(message = "Email cannot be empty!")
+    @Size(max = 100, message = "Email max charters = 100")
     private String email;
 
     @Column(name = "password", nullable = false)
-    @NotNull(message = "error.email.notEmpty")
-    @NotEmpty (message = "error.password.notEmpty")
-    @Size(min = 4, max = 100, message = "error.password.size")
+    @NotNull(message = "Password cannot be null!")
+    @NotEmpty (message = "Password cannot be empty!")
+    @Size(min = 4, max = 100, message = "Password must be between 4 and 100 characters!")
     private String password;
 
     @Column(name = "registred", nullable = false, columnDefinition = "timestamp default now()")
@@ -38,5 +39,7 @@ public class User {
 
     @Column(name = "enabled", nullable = false, columnDefinition = "boolean default true")
     private boolean enabled = true;
+
+    private BigDecimal balance;
 
 }

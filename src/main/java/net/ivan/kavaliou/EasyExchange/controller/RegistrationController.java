@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
@@ -25,6 +26,8 @@ public class RegistrationController {
         if (usersRepository.findByEmail(user.getEmail()).isPresent()){
             throw new ExsistException("User with this email alredy exsist!");
         }
+        user.setEmail(user.getEmail().trim().toLowerCase());
+        user.setBalance(BigDecimal.ZERO);
         return usersRepository.save(user);
     }
 

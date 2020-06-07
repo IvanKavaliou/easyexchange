@@ -35,7 +35,6 @@ public class Transaction {
     @NotNull
     private BigDecimal value;
 
-
     @Column(name = "transaction", nullable = false)
     @NotNull
     @Enumerated(EnumType.STRING)
