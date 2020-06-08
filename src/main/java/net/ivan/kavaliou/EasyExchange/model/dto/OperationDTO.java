@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @Builder
 @Data
-public class BuyDTO {
+public class OperationDTO {
     @NotNull
     private CurrencyType currency;
 

@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface TransactionsRepository extends JpaRepository<Transaction, Integer> {
     public Optional<Transaction> findById(Integer id);
     public List<Transaction> findAllByAccount_User(User user);
+    public List<Transaction> findAllByUser(Integer user);
 }

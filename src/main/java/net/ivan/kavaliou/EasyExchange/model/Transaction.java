@@ -27,10 +27,12 @@ public class Transaction {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_account", nullable = false)
+    @JoinColumn(name = "id_account", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
     private Account account;
+
+    @Column(name = "id_user", nullable = false)
+    private Integer user;
 
     @NotNull
     private BigDecimal value;
