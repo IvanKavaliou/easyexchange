@@ -110,6 +110,7 @@ public class TransactionsController {
                             Transaction.builder()
                                     .account(account.get())
                                     .transaction(TransactionType.SELL)
+                                    .user(user.getId())
                                     .date(new Date())
                                     .value(sell.getValue())
                                     .build());
@@ -139,6 +140,7 @@ public class TransactionsController {
                             Transaction.builder()
                             .account(account.get())
                             .transaction(TransactionType.BUY)
+                            .user(user.getId())
                             .date(new Date())
                             .value(buyDTO.getValue())
                                     .build());
@@ -160,7 +162,7 @@ public class TransactionsController {
                 result = arr.getJSONObject(i).getString(type.name().toLowerCase());
             }
             return BigDecimal.valueOf(Float.valueOf(result));
-        } catch (JSONException e){
+        } catch (Exception e){
             throw new NotFoundException("Bid for "+currencyType.name()+" not found!");
         }
     }
