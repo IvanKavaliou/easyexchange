@@ -38,14 +38,15 @@ public class CurrencyRatesController {
                 result.add(gson.fromJson(arr.getJSONObject(i).toString(),CurrencyRateDTO.class));
             }
             return result;
-        } catch (JSONException e){
-            throw new NotFoundException("Rates not found!");
+        } catch (Exception e){
+
         }
+        throw new NotFoundException("Rates not found!");
     }
 
     @GetMapping("/rates/{currencyType}")
     private CurrencyRateDTO getRate(@PathVariable CurrencyType currencyType){
-        ArrayList<CurrencyRateDTO> rates = getRates();
+            ArrayList<CurrencyRateDTO> rates = getRates();
         Optional<CurrencyRateDTO> rt = rates.stream().filter(r -> r.getCode().equals(currencyType)).findFirst();
         if (rt.isPresent()){
             return rt.get();

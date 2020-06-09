@@ -6,12 +6,8 @@ import net.ivan.kavaliou.EasyExchange.model.Account;
 import net.ivan.kavaliou.EasyExchange.repository.AccountsRepository;
 import net.ivan.kavaliou.EasyExchange.service.UsersService;
 import net.ivan.kavaliou.EasyExchange.utils.enums.CurrencyType;
-import net.ivan.kavaliou.EasyExchange.utils.enums.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
